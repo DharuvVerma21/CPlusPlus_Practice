@@ -17,7 +17,6 @@ int main(){
 	cin >> n;
 	// i = counter for number of rows
 	int i = 1;
-	// for upper half
 	while(i <= (2*n-1)){
 		// j = counter for number of columns
 		int j = 1;
