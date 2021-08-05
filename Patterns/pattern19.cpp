@@ -27,7 +27,7 @@ int main(){
 			j++;
 		}
 		j = 1;
-		// for bordering stars
+		// for stars
 		while(j <= i){
 			cout << "*";
 			j++;
