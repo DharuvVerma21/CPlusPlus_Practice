@@ -28,6 +28,7 @@ int main(){
 			cout << " ";
 			j++;
 		}
+		// for right side stars
 		if (i == 1){
 			int j = 1;
 			while(j < n){
