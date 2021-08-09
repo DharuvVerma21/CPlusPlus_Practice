@@ -2,9 +2,12 @@
 // totalSalary = basic + hra + da + allow – pf
 #include<iostream>
 using namespace std;
-int roundoff(float x){
-    int a = x;
-    float b = x-a;
+int roundoff(double x){
+    if (x >= 0)
+        int a = x;
+    else
+        int a = x - 1;
+    double b = x-a;
     b = b*100;
     if (b < 50){
         return a;
@@ -17,9 +20,9 @@ int main(){
     int basic;
     char grade;
     cin >> basic >> grade;
-    float hra = basic/5.0;
-    float da = basic/2.0;
-    float pf = basic*0.11;
+    double hra = basic/5.0;
+    double da = basic/2.0;
+    double pf = basic*0.11;
     int allow;
     switch(grade){
         case 65:
@@ -31,7 +34,7 @@ int main(){
         default:
             allow = 1300;
     }
-    float total_sal = basic + hra + da + allow - pf;
+    double total_sal = basic + hra + da + allow - pf;
     cout << roundoff(total_sal);
     return 0;
 }
