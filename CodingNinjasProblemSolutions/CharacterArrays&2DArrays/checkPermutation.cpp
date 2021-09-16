@@ -3,40 +3,40 @@
 #include<cstring>
 #define max 1000001
 using namespace std;
+void selectionSort(char *string){
+   int start = 0;
+   while(string[start+1] != '\0'){
+      int index = start, min = string[start];
+      for (int i=start+1; string[i] != '\0'; i++){
+         if (min > string[i]){
+            min = string[i];
+            index = i;
+         }
+      }
+      char temp = string[index];
+      string[index] = string[start];
+      string[start] = temp;
+      start++;
+   }
+}
 bool stringPermutation(char *string1, char *string2){
    if (strlen(string1) != strlen(string2)){
       return false;
    }
-   bool flag;
+   selectionSort(string1);
+   selectionSort(string2);
    for (int i=0; string1[i] != '\0'; i++){
-      flag = false;
-      for (int j=0; string2[j] != '\0'; j++){
-         if (string1[i] == string2[j]){
-            string2[j] = 'A';
-            flag = true;
-            break;
-         }
-      }
-      if (!flag){
+      if (string1[i] != string2[i]){
          return false;
       }
    }
    return true;
-}
-void lowerCase(char *string){
-   for (int i=0; string[i] != '\0'; i++){
-      if (string[i] >= 'A' && string[i] <= 'Z'){
-         string[i] = string[i] + 32;
-      }
-   }
 }
 int main(){
    char *string1 = new char[max];
    cin.getline(string1, max);
    char *string2 = new char[max];
    cin.getline(string2, max);
-   lowerCase(string1);
-   lowerCase(string2);
    if (stringPermutation(string1, string2)){
       cout << "true";
       return 0;
