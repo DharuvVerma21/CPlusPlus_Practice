@@ -2,6 +2,7 @@
 // Note : If multiple words are of same length, then answer will be first minimum length word in the string.
 // Note : Words are seperated by single space only.
 #include<iostream>
+#include<cstring>
 #include<climits>
 #define max 100001
 using namespace std;
@@ -17,6 +18,10 @@ void minimumLengthWord(char string[]){
          j = i+1;
       }
       i++;
+   }
+   if ((strlen(string)-j) < min){
+      min = (strlen(string)-j);
+      minIndex = j;
    }
    for (int i=minIndex; i<(minIndex+min); i++){
       cout << string[i];
