@@ -11,11 +11,11 @@ int firstIndex(int input[], int size, int x) {
     if (input[0] == x){
         return 0;
     }
-    int index = 1+firstIndex(input+1, size-1, x);
-    if (input[index] == x){
-        return index;
+    int ans = firstIndex(input+1, size-1, x);
+    if (ans >= 0){
+        ans++;
     }
-	return -1;
+    return ans;
 }
 int main(){
     int n;
