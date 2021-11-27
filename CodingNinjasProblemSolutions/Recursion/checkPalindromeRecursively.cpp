@@ -9,16 +9,17 @@ int strlen(char input[]){
     }
     return ans;
 }
-bool checkPalindrome(char input[]) {
-    int a = strlen(input);
-    if (a == 0 || a == 1){
+bool helperFunction(char input[], int start, int end){
+    if ((end-start) == 0 || (end-start) == 1){
         return true;
     }
-    if (input[0] == input[a-1]){
-        input[a-1] = '\0';
-        return checkPalindrome(input+1);
+    if (input[start] == input[end]){
+        return helperFunction(input, ++start, --end);
     }
     return false;
+}
+bool checkPalindrome(char input[]) {
+    return helperFunction(input, 0, strlen(input)-1);
 }
 int main() {
     char input[50];
