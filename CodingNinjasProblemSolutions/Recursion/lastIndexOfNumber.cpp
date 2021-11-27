@@ -9,10 +9,15 @@ int lastIndex(int input[], int size, int x) {
     if (size == 0){
         return -1;
     }
-    if (input[size-1] == x){
-        return (size-1);
+    int ans = lastIndex(input+1, size-1, x);
+    if(input[0] == x && ans == -1){
+        ans = 0;
+        return ans;
     }
-    return lastIndex(input, size-1, x);
+    if (ans >= 0){
+        ans++;
+    }
+    return ans;
 }
 int main(){
     int n;
