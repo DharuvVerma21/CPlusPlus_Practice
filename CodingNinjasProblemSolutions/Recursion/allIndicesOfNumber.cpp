@@ -7,16 +7,9 @@ int allIndexes(int input[], int size, int x, int output[]) {
     if (size == 0){
         return 0;
     }
-    int ans = allIndexes(input+1, size-1, x, output);
-    for (int i=0; i<ans; i++){
-        output[i]++;
-    }
-    if (input[0] == x){
-        for (int i=ans-1; i>=0; i--){
-            output[i+1] = output[i];
-        }
-        output[0] = 0;
-        return ans+1;
+    int ans = allIndexes(input, size-1, x, output);
+    if (input[size-1] == x){
+        output[ans++] = size-1;
     }
     return ans;
 }
