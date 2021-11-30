@@ -3,18 +3,22 @@
 
 #include<iostream>
 using namespace std;
-int helperFunction(int input[], int size, int x, int output[], int index){
+int allIndexes(int input[], int size, int x, int output[]) {
     if (size == 0){
         return 0;
     }
-    if (input[0] == x){
-        output[0] = index;
-        return 1 + helperFunction(input+1, size-1, x, output+1, index+1);
+    int ans = allIndexes(input+1, size-1, x, output);
+    for (int i=0; i<ans; i++){
+        output[i]++;
     }
-    return helperFunction(input+1, size-1, x, output, index+1);
-}
-int allIndexes(int input[], int size, int x, int output[]) {
-    return helperFunction(input, size, x, output, 0);
+    if (input[0] == x){
+        for (int i=ans-1; i>=0; i--){
+            output[i+1] = output[i];
+        }
+        output[0] = 0;
+        return ans+1;
+    }
+    return ans;
 }
 int main(){
     int n;
