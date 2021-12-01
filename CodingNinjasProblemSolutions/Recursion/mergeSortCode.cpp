@@ -3,62 +3,59 @@
 
 #include <iostream>
 using namespace std;
-void mergeTwoSortedArrays(int arr[], int arr1[], int size1, int arr2[], int size2){
-    int size = size1 + size2;
-    int ptr1 = 0, ptr2 = 0, i;
-    for (i=0; i<size && ptr1<size1 && ptr2<size2; i++){
-        if (arr1[ptr1] > arr2[ptr2]){
-            arr[i] = arr2[ptr2];
-            ptr2++;
+void merge(int input[], int start, int end){
+    int mid = (start+end)/2;
+    int size = (end-start+1);
+    int *arr = new int[size];
+    int k = 0;
+    int i = start, j = mid+1;
+    while(i <= mid && j <= end){
+        if (input[i] < input[j]){
+            arr[k] = input[i];
+            k++;
+            i++;
         }
-        else if (arr1[ptr1] < arr2[ptr2]){
-            arr[i] = arr1[ptr1];
-            ptr1++;
+        else if (input[i] > input[j]){
+            arr[k] = input[j];
+            k++;
+            j++;
         }
         else{
-            arr[i] = arr1[ptr1];
+            arr[k] = input[i];
+            k++;
+            arr[k] = input[j];
+            k++;
+            j++;
             i++;
-            arr[i] = arr2[ptr2];
-            ptr1++;
-            ptr2++;
         }
     }
-    while(ptr1 < size1){
-        arr[i++] = arr1[ptr1++];
+    while(i <= mid){
+        arr[k] = input[i];
+        i++;
+        k++;
     }
-    while(ptr2 < size2){
-        arr[i++] = arr2[ptr2++];
+    while(j <= end){
+        arr[k] = input[j];
+        j++;
+        k++;
     }
-}
-
-void mergeSort(int input[], int size){
-    if (size == 0 || size == 1){
-        return;
-    }
-    int n;
-    if (size%2 == 0){
-        n = size/2;
-        mergeSort(input, n);
-        mergeSort(input+n, n);
-    }
-    else{
-        n = (size/2)+1;
-        mergeSort(input, n);
-        mergeSort(input+n, n-1);
-    }
-    int *arr = new int[size];
-    if (size%2 == 0){
-        mergeTwoSortedArrays(arr, input, n, input+n, n);
-    }
-    else{
-        mergeTwoSortedArrays(arr, input, n, input+n, n-1);
-    }
-    for (int i=0; i<size; i++){
-        input[i] = arr[i];
+    for (int i=start, k=0; i<=end; i++, k++){
+        input[i] = arr[k];
     }
     delete [] arr;
 }
-
+void merge_sort(int input[], int start, int end){
+    if (start >= end){
+        return;
+    }
+    int mid = (start+end)/2;
+    merge_sort(input, start, mid);
+    merge_sort(input, mid+1, end);
+    merge(input, start, end);
+}
+void mergeSort(int input[], int size){
+    merge_sort(input, 0, size-1);
+}
 int main() {
   	int length;
   	cin >> length;
